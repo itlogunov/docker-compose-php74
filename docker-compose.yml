@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+
+  nginx:
+    image: nginx:1.25.3
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www
+      - ./_docker/config/nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - app
+    container_name: project_nginx
+
+  app:
+    build:
+      context: .
+      dockerfile: _docker/app/Dockerfile
+    volumes:
+      - ./:/var/www
+    depends_on:
+      - db
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      PHP_IDE_CONFIG: serverName=Docker
+    container_name: project_app
+
+  db:
+    image: mysql:5.7.38
+    restart: always
+    volumes:
+      - ./_docker/config/mysql/conf.d:/etc/mysql/conf.d
+      - ./_docker/tmp/mysql/data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: db
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "8886:3306"
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --default-authentication-plugin=mysql_native_password
+    container_name: project_db
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    restart: always
+    ports:
+      - "8090:80"
+    environment:
+      - PMA_ARBITRARY=1
+      - UPLOAD_LIMIT=1073741824
+    depends_on:
+      - db
+    container_name: project_phpmyadmin
