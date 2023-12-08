@@ -7,7 +7,7 @@
 ---
 
 ### сайт доступен по ссылке 
-#### `http://localhost`
+`http://localhost`
 
 ### для битрикса
 заменить содержимое конфига nginx на `_docker/config/nginx/nginx_bitrix.conf`
@@ -23,31 +23,31 @@
 ---
 
 ### в .env указывать
-`DB_CONNECTION=mysql`
-`DB_HOST=db` - имя контейнера с бд
-`DB_PORT=3306`
-`DB_DATABASE=db`
-`DB_USERNAME=root`
+`DB_CONNECTION=mysql`  
+`DB_HOST=db` - имя контейнера с бд  
+`DB_PORT=3306`  
+`DB_DATABASE=db`  
+`DB_USERNAME=root`  
 `DB_PASSWORD=root`
 
 ---
 
 ### в sequel указывать
-`type: tcp/ip`
-`host: localhost`
-`user: root`
-`password: root`
-`port: 8886`
+`type: tcp/ip`  
+`host: localhost`  
+`user: root`  
+`password: root`  
+`port: 8886` 
 
 ---
 
 ### smtp
 #### в .env указать:
-`MAIL_HOST=smtp.yandex.ru
-MAIL_PORT=587
-MAIL_USERNAME=почта@yandex.ru
-MAIL_PASSWORD=пароль_приложения
-MAIL_ENCRYPTION=tls`
+`MAIL_HOST=smtp.yandex.ru`  
+`MAIL_PORT=587`  
+`MAIL_USERNAME=почта@yandex.ru`  
+`MAIL_PASSWORD=пароль_приложения`  
+`MAIL_ENCRYPTION=tls`
 
 ---
 
