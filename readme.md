@@ -51,9 +51,25 @@ MAIL_ENCRYPTION=tls`
 
 ---
 
-### xdebug
-#### в настройках phpstorm создать новый сервер:
-`name=Docker
-host=Docker
-port=80(внутренний порт nginx)
-/ указать директорию проекта и путь на сервере /var/www, а затем добавить php-интерпретатор`
+### xdebug + phpstorm
+#### в настройках создать новый `PHP->Servers`:
+`Name=Docker`  
+`Host=Docker`  
+`Port=80(внутренний порт nginx)`  
+`Debugger=Xdebug`  
+прописать mapping проекта на сервере `/var/www`
+#### создать новый `PHP->CLI Interpreter`
+указать docker-compose и контейнер, в котором установлен php с xdebug
+### настроить `PHP->Debug->DBGp Proxy`
+`IDE key: PHPSTORM`  
+`Host: host.docker.internal`  
+`Port: 9000`
+### создать `PHP Remote Debug` конфигурацию в меню `Run/debug configurations` (справа сверху)
+`Server: Docker`    
+`IDE key (session id): PHPSTORM`
+### поставить в браузер расширение `Xdebug helper`
+в настройках указать `IDE key: PHPSTORM`
+### запуск
+поставить брекпоинт  
+включить прослушку  
+активировать расширение в браузере в режиме debug 
